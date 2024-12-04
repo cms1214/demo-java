@@ -20,4 +20,18 @@ class UserMapperTest {
         userMapper.insert(user);
         System.out.println("添加成功");
     }
+
+    //测试删除用户
+    @Test
+    public void testDeleteUser() {
+        userMapper.deleteById(2);
+        System.out.println("删除成功");
+    }
+
+    //查询用户
+    @Test
+    public void testGetUser() {
+        User user = userMapper.selectById(2);
+        System.out.println(user);
+    }
 }

@@ -2,6 +2,7 @@ package org.novel.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.novel.model.dto.UserDTO;
+import org.novel.model.dto.UserRegisterDTO;
 import org.novel.model.po.User;
 import org.novel.model.vo.ResponseVO;
 import org.novel.model.vo.UserVO;
@@ -109,11 +110,9 @@ public class UserController {
      * @param user 用户信息
      */
     @PostMapping("/register")//用于接收保存数据请求
-    public ResponseVO save(@RequestBody UserDTO user){
-        UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(user, userVO);
-        //对数据进行保存
-        return ResponseVO.ok().data("item", userVO);
+    public ResponseVO save(@RequestBody UserRegisterDTO user){
+        // alt + enter 快速生成方法
+        return userService.register(user);
     }
 
     /**
