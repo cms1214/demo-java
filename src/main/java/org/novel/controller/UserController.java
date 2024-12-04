@@ -1,5 +1,6 @@
 package org.novel.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.novel.model.dto.UserDTO;
 import org.novel.model.vo.UserVO;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * xxx管理系统/用户模块
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -26,6 +28,11 @@ public class UserController {
         userVO.setName("张三");
         userVO.setAge(18);
         userVO.setEmail("zhangsan@163.com");
+
+        log.info("info级别的日志");
+        log.warn("warn级别的日志");
+        log.error("error级别的日志");
+        log.debug("debug级别的日志");
 
         UserVO userVO1 = new UserVO();
         userVO1.setName("李四");

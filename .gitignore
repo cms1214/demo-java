@@ -3,6 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### 日志信息 ###
+demo_log/
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/jarRepositories.xml
