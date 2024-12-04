@@ -1,6 +1,7 @@
 package org.novel.service;
 
 import org.novel.model.dto.UserDTO;
+import org.novel.model.dto.UserLoginDTO;
 import org.novel.model.dto.UserRegisterDTO;
 import org.novel.model.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -21,4 +22,11 @@ public interface IUserService extends IService<User> {
      * @return 视图层对象
      */
     ResponseVO register(UserRegisterDTO user);
+
+    /**
+     * 登录方法
+     * @param userLoginDTO 登录信息
+     * @return json视图对象
+     */
+    ResponseVO login(UserLoginDTO userLoginDTO);
 }

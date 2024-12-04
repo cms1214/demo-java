@@ -2,6 +2,7 @@ package org.novel.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.novel.model.dto.UserDTO;
+import org.novel.model.dto.UserLoginDTO;
 import org.novel.model.dto.UserRegisterDTO;
 import org.novel.model.po.User;
 import org.novel.model.vo.ResponseVO;
@@ -113,6 +114,17 @@ public class UserController {
     public ResponseVO save(@RequestBody UserRegisterDTO user){
         // alt + enter 快速生成方法
         return userService.register(user);
+    }
+
+    /**
+     * 用户登录
+     * @return
+     */
+    @PostMapping("/login")
+    public ResponseVO login(@RequestBody UserLoginDTO userLoginDTO) {
+        // ctrl+alt+鼠标左键 跳转到方法实现类
+        ResponseVO responseVO = userService.login(userLoginDTO);
+        return responseVO;
     }
 
     /**
