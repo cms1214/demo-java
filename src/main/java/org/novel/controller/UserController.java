@@ -2,6 +2,7 @@ package org.novel.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.novel.model.dto.UserDTO;
+import org.novel.model.vo.ResponseVO;
 import org.novel.model.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class UserController {
      * @return 用户列表
      */
     @GetMapping("/getList")// 负责接受get请求
-    public List<UserVO> get() {
+    public ResponseVO get() {
         ArrayList<UserVO> userList = new ArrayList<>();
 
         UserVO userVO = new UserVO();
@@ -42,7 +43,7 @@ public class UserController {
         userList.add(userVO);
         userList.add(userVO1);
 
-        return userList;
+        return ResponseVO.ok().data("item", userList);
     }
 
     /**
