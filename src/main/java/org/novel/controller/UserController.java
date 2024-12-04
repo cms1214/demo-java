@@ -35,6 +35,8 @@ public class UserController {
         log.error("error级别的日志");
         log.debug("debug级别的日志");
 
+        int i = 1/0;
+
         UserVO userVO1 = new UserVO();
         userVO1.setName("李四");
         userVO1.setAge(19);
