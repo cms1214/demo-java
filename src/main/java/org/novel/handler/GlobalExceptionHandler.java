@@ -44,6 +44,14 @@ public class GlobalExceptionHandler {
 
 
     /**
+     * 拦截ArithmeticException异常
+     */
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseVO handleArithmeticException(ArithmeticException e) {
+        return ResponseVO.error().message("除零异常");
+    }
+
+    /**
      * 自定义异常
      */
     @ExceptionHandler(BusinessException.class)
