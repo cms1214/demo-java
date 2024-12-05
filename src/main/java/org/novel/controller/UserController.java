@@ -9,6 +9,7 @@ import org.novel.model.dto.UserRegisterDTO;
 import org.novel.model.po.User;
 import org.novel.model.vo.ResponseVO;
 import org.novel.model.vo.UserVO;
+import org.novel.query.UserPageQuery;
 import org.novel.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,16 @@ public class UserController {
         ResponseVO responseVO = userService.login(userLoginDTO);
         return responseVO;
     }
+
+    /**
+     * 分页查询
+     * @param pageQuery 分页查询对象
+     */
+    @GetMapping("/page")
+    public ResponseVO queryUserPage( UserPageQuery pageQuery){
+        return userService.queryUserPage(pageQuery);
+    }
+
 
     /**
      * 普通保存用户

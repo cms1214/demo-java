@@ -1,13 +1,18 @@
 package org.novel.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.codec.digest.Md5Crypt;
 import org.novel.model.dto.UserDTO;
 import org.novel.model.dto.UserLoginDTO;
 import org.novel.model.dto.UserRegisterDTO;
 import org.novel.model.po.User;
 import org.novel.mapper.UserMapper;
+import org.novel.model.vo.PageVO;
 import org.novel.model.vo.ResponseVO;
+import org.novel.query.UserPageQuery;
 import org.novel.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.novel.utils.BusinessException;
@@ -71,6 +76,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
             return ResponseVO.setResult(ResponseEnum.ACCOUNT_UNREGISTER);//未注册
         }
+    }
+
+    /**
+     * 分页查询用户列表
+     * @param pageQuery 查询参数
+     * @return 分页信息
+     */
+    @Override
+    public ResponseVO queryUserPage(UserPageQuery pageQuery) {
+        Page<User> sort = pageQuery.toMpPageDefaultSortByCreateTimeDesc();
+        Page<User> page = lambdaQuery()
+                .eq(ObjectUtils.isNotEmpty(pageQuery.getAge()),User::getAge, pageQuery.getAge())
+                .like(StringUtils.isNotBlank(pageQuery.getEmail()),User::getEmail, pageQuery.getEmail())
+                .like(StringUtils.isNotBlank(pageQuery.getName()),User::getName, pageQuery.getName())
+                .page(sort);
+        PageVO<User> userPageVo = new PageVO<>();
+        userPageVo.of(page);
+        return ResponseVO.ok().data("items",userPageVo);
     }
 
     /**
