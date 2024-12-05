@@ -1,6 +1,8 @@
 package org.novel.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.novel.handler.LoginInterceptor;
+import org.novel.model.bo.LoginUserBO;
 import org.novel.model.dto.UserDTO;
 import org.novel.model.dto.UserLoginDTO;
 import org.novel.model.dto.UserRegisterDTO;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.soap.Addressing;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -83,9 +86,16 @@ public class UserController {
         // @PathVariable 用于接收解析路径参数，http://localhost:8080/api/user/getUserById/123
         UserVO userVO = new UserVO();
         userVO.setId(id);
-        userVO.setName("张三");
+        userVO.setName("111");
         userVO.setAge(18);
-        return ResponseVO.ok().data("item", userVO);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("查询出来的用户", userVO);
+        LoginUserBO loginUserBO = LoginInterceptor.threadLocal.get();
+        UserVO userVO1 = new UserVO();
+        userVO1.setName(loginUserBO.getName());
+        userVO1.setEmail(loginUserBO.getEmail());
+        map.put("当前登录用户", userVO1);
+        return ResponseVO.ok().data("item", map);
     }
 
     /**
